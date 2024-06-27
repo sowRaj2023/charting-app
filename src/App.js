@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Chart from './components/Chart';
 import './App.css';
 
-function App() {
+const timeFrame = [
+  "daily",
+  "weekly",
+  "monthly"
+]
+
+const App = () => {
+  const [period, setPeriod] = useState('daily');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className='heading'>Time Series Data Chart</h1>
+      <div className="controls">
+        {timeFrame.map(each=>(
+          <button key ={each}  onClick={() => setPeriod(each)} className={period === each ? "active" : ""}>{each}</button>
+          
+        ))}
+        
+      </div>
+      <Chart period={period} />
     </div>
   );
-}
+};
 
 export default App;
+
